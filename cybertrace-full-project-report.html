@@ -1,0 +1,528 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>CyberTrace – Project Report</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;line-height:1.75;color:#1a2636;background:#fff;max-width:860px;margin:0 auto;padding:2.5rem 2rem}
+
+  /* ── COVER ── */
+  .cover{text-align:center;padding:2.5rem 1rem 2rem;border-bottom:3px solid #1a3a5c;margin-bottom:2rem}
+  .cover-badge{display:inline-block;background:#fef2f2;color:#dc2626;border:1.5px solid #fca5a5;border-radius:20px;padding:.25rem 1rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;margin-bottom:1rem;text-transform:uppercase}
+  .cover h1{font-size:2.4rem;font-weight:900;color:#1a3a5c;letter-spacing:-.02em;margin-bottom:.3rem}
+  .cover h2{font-size:.95rem;font-weight:400;color:#4a5568;margin-bottom:1.5rem}
+  .cover-meta{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 2rem;max-width:500px;margin:0 auto;text-align:left;font-size:.83rem}
+  .cover-meta dt{color:#718096;font-weight:600}
+  .cover-meta dd{color:#1a2636}
+
+  /* ── HEADINGS ── */
+  h3.sec{font-size:1.05rem;font-weight:800;color:#1a3a5c;border-left:4px solid #2563eb;padding-left:.7rem;margin:2.2rem 0 .75rem;text-transform:uppercase;letter-spacing:.04em}
+  h4.sub{font-size:.9rem;font-weight:700;color:#2563eb;margin:1.2rem 0 .35rem}
+  p{margin-bottom:.7rem;color:#374151}
+  ul,ol{padding-left:1.4rem;margin-bottom:.9rem;color:#374151}
+  li{margin-bottom:.3rem}
+
+  /* ── BOXES ── */
+  .disclaimer{background:#fef2f2;border:1.5px solid #fca5a5;border-left:5px solid #dc2626;border-radius:0 8px 8px 0;padding:.75rem 1rem;margin-bottom:1.5rem;font-size:.82rem;color:#991b1b;font-weight:600}
+  .infobox{background:#eff6ff;border:1.5px solid #bfdbfe;border-left:5px solid #2563eb;border-radius:0 8px 8px 0;padding:.75rem 1rem;margin-bottom:1rem;font-size:.84rem;color:#1e40af}
+  .greenbox{background:#f0fdf4;border:1.5px solid #86efac;border-left:5px solid #16a34a;border-radius:0 8px 8px 0;padding:.75rem 1rem;margin-bottom:1rem;font-size:.84rem;color:#14532d}
+  .purplebox{background:#f5f3ff;border:1.5px solid #c4b5fd;border-left:5px solid #7c3aed;border-radius:0 8px 8px 0;padding:.75rem 1rem;margin-bottom:1rem;font-size:.84rem;color:#4c1d95}
+
+  /* ── TABLES ── */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:1.2rem;border-radius:8px;overflow:hidden}
+  thead{background:#1a3a5c}
+  th{padding:.6rem .9rem;text-align:left;color:#fff;font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+  td{padding:.52rem .9rem;border-top:1px solid #e5e7eb;color:#374151;vertical-align:top}
+  tr:nth-child(even) td{background:#f8fafc}
+  .td-high{color:#dc2626;font-weight:700}
+  .td-med{color:#ea580c;font-weight:700}
+  .td-low{color:#16a34a;font-weight:700}
+  .td-blue{color:#2563eb;font-weight:600}
+  .td-open{color:#dc2626;font-weight:700}
+  .td-active{color:#ea580c;font-weight:700}
+  .td-closed{color:#16a34a;font-weight:700}
+  .td-critical{color:#fff;background:#dc2626;font-weight:700;border-radius:4px;padding:.15rem .5rem;font-size:.72rem}
+  .td-hbadge{color:#fff;background:#ea580c;font-weight:700;border-radius:4px;padding:.15rem .5rem;font-size:.72rem}
+
+  /* ── CODE ── */
+  .codebox{background:#1a3a5c;border-radius:8px;padding:.9rem 1.1rem;font-family:'Courier New',monospace;font-size:.78rem;color:#86efac;margin-bottom:1.2rem;line-height:2;overflow-x:auto}
+  .codebox .cm{color:#94a3b8}
+  code{background:rgba(0,0,0,.07);padding:.1rem .35rem;border-radius:4px;font-family:'Courier New',monospace;font-size:.8rem;color:#1e40af}
+
+  /* ── FEATURE GRID ── */
+  .feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.2rem}
+  .feat-card{border:1.5px solid #e5e7eb;border-radius:8px;padding:.75rem .9rem;background:#f8fafc}
+  .feat-card .icon{font-size:1.3rem;margin-bottom:.3rem;display:block}
+  .feat-card .ftitle{font-weight:700;font-size:.84rem;color:#1a2636;margin-bottom:.2rem}
+  .feat-card .fdesc{font-size:.78rem;color:#718096;line-height:1.5}
+
+  /* ── ALERT DEMOS ── */
+  .alert-demo{border-radius:10px;padding:.9rem 1.1rem;margin-bottom:.75rem;border:1.5px solid}
+  .alert-crit{background:#fff1f2;border-color:#fca5a5;border-left:5px solid #dc2626}
+  .alert-high{background:#fff7ed;border-color:#fdba74;border-left:5px solid #ea580c}
+  .alert-demo-head{display:flex;align-items:center;gap:.5rem;font-weight:800;font-size:.88rem;color:#1a2636;margin-bottom:.35rem}
+  .alert-demo-meta{font-size:.78rem;color:#718096;margin-bottom:.3rem}
+  .alert-demo-detail{font-size:.82rem;color:#374151;line-height:1.6}
+  .sev-crit{background:#dc2626;color:#fff;padding:.15rem .55rem;border-radius:12px;font-size:.7rem;font-weight:800}
+  .sev-high{background:#ea580c;color:#fff;padding:.15rem .55rem;border-radius:12px;font-size:.7rem;font-weight:800}
+
+  /* ── TIMELINE ── */
+  .tl{padding-left:1.8rem;position:relative;margin-bottom:1rem}
+  .tl::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#2563eb,#7c3aed)}
+  .tl-item{position:relative;margin-bottom:.6rem}
+  .tl-dot{position:absolute;left:-1.55rem;top:.3rem;width:11px;height:11px;border-radius:50%;background:#7c3aed;border:2px solid #fff;box-shadow:0 0 0 2px #c4b5fd}
+  .tl-text{font-size:.8rem;color:#374151}
+  .tl-time{font-family:'Courier New',monospace;font-size:.72rem;color:#718096}
+
+  /* ── RULE CARDS ── */
+  .rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.2rem}
+  .rule-card{background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:8px;padding:.7rem .9rem;font-size:.82rem;color:#1e40af}
+  .rule-card strong{color:#1a3a5c;display:block;margin-bottom:.15rem}
+
+  /* ── LOCATION TABLE ── */
+  .loc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.5rem;margin-bottom:1.2rem}
+  .loc-card{background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;padding:.55rem .8rem;font-size:.8rem;color:#14532d;font-weight:600;text-align:center}
+
+  /* ── PAGE BREAK ── */
+  .pb{page-break-before:always;margin-top:2.5rem;border-top:2px dashed #e5e7eb;padding-top:1.5rem}
+
+  /* ── FOOTER ── */
+  .report-footer{margin-top:3rem;padding-top:1rem;border-top:1px solid #e5e7eb;text-align:center;font-size:.72rem;color:#9ca3af}
+</style>
+</head>
+<body>
+
+
+<div class="cover">
+  <div class="cover-badge">⚠ Educational Simulation — Fictional Data Only</div>
+  <h1>🔍 CyberTrace</h1>
+  <h2>Simulated Digital Forensics Lab — Complete Project Report</h2>
+  <dl class="cover-meta">
+    <dt>Project Title</dt>       <dd>CyberTrace – Simulated Digital Forensics Lab</dd>
+    <dt>Project Type</dt>        <dd>Educational Web Application</dd>
+    <dt>Technologies</dt>        <dd>HTML5 · CSS3 · Vanilla JavaScript</dd>
+    <dt>Platform</dt>            <dd>Runs locally in any web browser</dd>
+    <dt>Data Used</dt>           <dd>100% Fictional — India-based locations</dd>
+    <dt>Total Files</dt>         <dd>7 (3 application + 4 documentation)</dd>
+    <dt>Internet Required</dt>   <dd>No — fully offline</dd>
+    <dt>Installation Required</dt><dd>None — double-click to open</dd>
+  </dl>
+</div>
+
+<div class="disclaimer">
+  ⚠️ IMPORTANT DISCLAIMER: This project is an educational simulation only. All usernames, names, IP addresses, locations, events, and cases are entirely fictional. No real individuals, organisations, systems, or networks are represented. All Indian city names used are fictional location labels for educational illustration. This tool must not be used for any real forensic investigation.
+</div>
+
+
+<h3 class="sec">1. Introduction</h3>
+
+<p>
+  <strong>CyberTrace</strong> is a beginner-friendly, browser-based educational web application that introduces learners to the core concepts and workflows of <em>digital forensics</em> and <em>cybersecurity incident investigation</em>. It simulates a fictional corporate network that has experienced multiple security incidents — giving users a safe, visual, and interactive environment to understand how analysts think and work.
+</p>
+<p>
+  The application is built entirely using front-end web technologies — HTML5, CSS3, and Vanilla JavaScript — with no server, no backend, no database installation, and no external libraries. It runs simply by opening a single HTML file in any modern web browser. No technical setup is required from the user.
+</p>
+<p>
+  A key design principle is <strong>transparency</strong>: every page prominently displays a disclaimer banner and red "EDUCATIONAL SIMULATION — FICTIONAL DATA ONLY" labels, ensuring learners always understand the context of what they are seeing. All location data has been set to fictional Indian cities to contextualise the simulation for an Indian audience.
+</p>
+
+
+<h3 class="sec">2. Project Objectives</h3>
+
+<table>
+  <thead><tr><th>#</th><th>Objective</th><th>How It Is Achieved</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Introduce digital forensics concepts to complete beginners</td><td>7 interactive sections, each with a pictorial "What is this?" explanation card</td></tr>
+    <tr><td>2</td><td>Demonstrate real security investigation workflows</td><td>Event log, timeline, case management, and login analysis sections</td></tr>
+    <tr><td>3</td><td>Teach advanced login threat detection patterns</td><td>3 new detection algorithms: brute-force, credential stuffing, compromise detection</td></tr>
+    <tr><td>4</td><td>Show cryptographic hashing in practice</td><td>Live SHA-256 demo using the browser's built-in Web Crypto API</td></tr>
+    <tr><td>5</td><td>Keep everything safe, fictional, and clearly labelled</td><td>All data hardcoded as JS arrays; no uploads, no network calls, red disclaimers on every page</td></tr>
+    <tr><td>6</td><td>Require zero installation for the user</td><td>Pure HTML/CSS/JS — double-click index.html, opens in any browser</td></tr>
+    <tr><td>7</td><td>Contextualise data for an Indian audience</td><td>All login locations use fictional Indian cities (Mumbai, Delhi, Bengaluru, etc.)</td></tr>
+    <tr><td>8</td><td>Teach web development fundamentals alongside forensics</td><td>Every file is heavily commented; separate CODE_EXPLANATION.md file included</td></tr>
+  </tbody>
+</table>
+
+
+<h3 class="sec">3. Technologies Used</h3>
+
+<table>
+  <thead><tr><th>Technology</th><th>Type</th><th>Purpose in CyberTrace</th></tr></thead>
+  <tbody>
+    <tr><td class="td-blue">HTML5</td><td>Markup language</td><td>Full page structure — all sections, tables, forms, navigation, feature strip, illustration headers</td></tr>
+    <tr><td class="td-blue">CSS3</td><td>Stylesheet language</td><td>Light professional theme — cards, tables, timeline, alert panels, responsive layout, animations</td></tr>
+    <tr><td class="td-blue">Vanilla JavaScript (ES6+)</td><td>Programming language</td><td>All data arrays, rendering logic, 7 detection rules, 3 alert functions, SHA-256, CSV export</td></tr>
+    <tr><td class="td-blue">Web Crypto API</td><td>Browser built-in API</td><td>Real SHA-256 hash computation — no external library required</td></tr>
+    <tr><td class="td-blue">Blob + URL API</td><td>Browser built-in API</td><td>In-browser CSV file generation and download trigger</td></tr>
+    <tr><td class="td-blue">CSS Custom Properties</td><td>CSS feature</td><td>Theme variables (colours, shadows) defined once and reused across all 490+ lines of CSS</td></tr>
+    <tr><td class="td-blue">CSS Grid &amp; Flexbox</td><td>CSS layout</td><td>Responsive card grids, feature strips, alert layout, navbar</td></tr>
+  </tbody>
+</table>
+
+<div class="infobox">
+  <strong>Why no frameworks?</strong> — Using only plain HTML, CSS, and JavaScript keeps the project beginner-readable, dependency-free, and educational. Every line of code can be understood without needing to learn React, Node.js, npm, or any build tools. The entire application is 3 files.
+</div>
+
+
+<h3 class="sec">4. File &amp; Folder Structure</h3>
+
+<div class="codebox">
+CyberTrace/
+│
+├── index.html            <span class="cm">← Main webpage — all 7 sections, navigation, hero, feature strip</span>
+├── style.css             <span class="cm">← All styling — light theme, cards, tables, timeline, alert cards (~490 lines)</span>
+├── app.js                <span class="cm">← All JS — 10 sections, data arrays, 9 render/detect functions (~850 lines)</span>
+│
+├── README.txt            <span class="cm">← Plain-text setup guide and feature overview</span>
+├── requirements.txt      <span class="cm">← What is needed to run (just a browser)</span>
+├── CODE_EXPLANATION.md   <span class="cm">← Beginner code walkthrough — every concept explained</span>
+└── PROJECT_SUMMARY.md    <span class="cm">← One-page project overview for sharing</span>
+</div>
+
+<table>
+  <thead><tr><th>File</th><th>Lines (approx.)</th><th>Responsibility</th></tr></thead>
+  <tbody>
+    <tr><td class="td-blue">index.html</td><td>~370</td><td>HTML skeleton — all sections, containers, nav, hero, feature strip, illustration headers, alert panel HTML</td></tr>
+    <tr><td class="td-blue">style.css</td><td>~650</td><td>All visual styling — light theme, card shadows, table gradients, timeline line, alert card variants, responsive breakpoints</td></tr>
+    <tr><td class="td-blue">app.js</td><td>~850</td><td>10 sections: fictional data arrays, dashboard rendering, event log filtering, login detection (4 row rules + 3 alert detectors), timeline, cases, SHA-256, CSV export, init</td></tr>
+  </tbody>
+</table>
+
+
+<h3 class="sec">5. Application Features</h3>
+
+<div class="feat-grid">
+  <div class="feat-card">
+    <span class="icon">📊</span>
+    <div class="ftitle">Dashboard</div>
+    <div class="fdesc">6 live stat cards calculated from fictional data: total events, high-severity alerts, suspicious logins, total cases, open/active cases, hashed evidence items. Includes a pulsing green "Simulation Active" status indicator.</div>
+  </div>
+  <div class="feat-card">
+    <span class="icon">📋</span>
+    <div class="fdesc"><strong style="color:#1a2636">Event Log</strong><br />22 fictional system events in a filterable table. Severity filter buttons (High/Medium/Low). Navy-to-blue gradient table header. One-click CSV export with disclaimer row.</div>
+  </div>
+  <div class="feat-card">
+    <span class="icon">🚨</span>
+    <div class="ftitle">Suspicious Login Detector + Alerts Panel</div>
+    <div class="fdesc">Two-part section: a row-level detection table (4 rules) and a full Alerts Panel with 3 advanced pattern-detection algorithms. Each alert card has a togglable plain-English explanation. All locations are fictional Indian cities.</div>
+  </div>
+  <div class="feat-card">
+    <span class="icon">🕒</span>
+    <div class="fdesc"><strong style="color:#1a2636">Forensic Timeline</strong><br />Visual vertical timeline for 3 fictional cases, switchable via dropdown. Gradient timeline line. Each step shows actor, action, evidence artefact, and analyst notes.</div>
+  </div>
+  <div class="feat-card">
+    <span class="icon">🗂️</span>
+    <div class="fdesc"><strong style="color:#1a2636">Investigation Cases</strong><br />6 fictional case file cards — insider threat, USB intrusion, VPN breach, privilege escalation, phishing, and firewall compromise. Each card has a colour-strip top border and status badge.</div>
+  </div>
+  <div class="feat-card">
+    <span class="icon">🔐</span>
+    <div class="fdesc"><strong style="color:#1a2636">SHA-256 Hash Demo</strong><br />Live hash computation as you type. Uses the Web Crypto API — no library. Avalanche effect explanation. 5 pre-loaded fictional evidence file hashes in a table.</div>
+  </div>
+</div>
+
+
+<div class="pb">
+<h3 class="sec">6. Fictional Data Design</h3>
+
+<h4 class="sub">6.1 Fictional Usernames &amp; Roles</h4>
+<table>
+  <thead><tr><th>Username</th><th>Role (Fictional)</th><th>Involvement in Scenarios</th></tr></thead>
+  <tbody>
+    <tr><td class="td-blue">alex.morgan</td><td>Marketing analyst</td><td>Normal user — no incidents detected</td></tr>
+    <tr><td class="td-blue">sam.taylor</td><td>IT support engineer</td><td>Admin whose credentials were abused in Case #004</td></tr>
+    <tr><td class="td-blue">jordan.blake</td><td>Finance department</td><td>Insider threat suspect — Case #001; 5 failed logins detected</td></tr>
+    <tr><td class="td-blue">casey.nova</td><td>HR administrator</td><td>Normal user — 2 failed logins (forgotten password, not suspicious)</td></tr>
+    <tr><td class="td-blue">riley.cross</td><td>External/unknown account</td><td>VPN attacker via Tor — Case #003</td></tr>
+    <tr><td class="td-blue">phantom_x</td><td>Rogue account (created by attacker)</td><td>Created by attacker — Cases #004 &amp; #006; deleted audit logs</td></tr>
+    <tr><td class="td-blue">dev.winters</td><td>Developer</td><td>Phishing victim — Case #005; macro executed via Outlook</td></tr>
+    <tr><td class="td-blue">pat.sterling</td><td>Remote contractor</td><td>9 failed login attempts from unknown location</td></tr>
+    <tr><td class="td-blue">meera.iyer</td><td>Fictional employee</td><td>NEW — Brute-force victim: 7 failures then successful login (Kolkata)</td></tr>
+    <tr><td class="td-blue">raj.verma</td><td>Fictional employee</td><td>NEW — 7 failed attempts from Delhi, India</td></tr>
+    <tr><td class="td-blue">admin / root / superuser</td><td>Default system accounts (targeted)</td><td>NEW — Credential stuffing: 3 usernames from one IP (Mumbai)</td></tr>
+  </tbody>
+</table>
+
+<h4 class="sub">6.2 Fictional Indian Locations Used</h4>
+<div class="loc-grid">
+  <div class="loc-card">📍 Mumbai, India</div>
+  <div class="loc-card">📍 Bengaluru, India</div>
+  <div class="loc-card">📍 Chennai, India</div>
+  <div class="loc-card">📍 Hyderabad, India</div>
+  <div class="loc-card">📍 Delhi, India</div>
+  <div class="loc-card">📍 Pune, India</div>
+  <div class="loc-card">📍 Kolkata, India</div>
+  <div class="loc-card">📍 Ahmedabad, India</div>
+</div>
+
+<h4 class="sub">6.3 Event Log Summary</h4>
+<table>
+  <thead><tr><th>Severity</th><th>Count</th><th>Example Event Types</th></tr></thead>
+  <tbody>
+    <tr><td class="td-high">High</td><td>14</td><td>Login failure, USB insertion, file bulk copy, process spawn, SQL injection attempt, account creation, file deletion, data exfiltration, firewall rule, system shutdown</td></tr>
+    <tr><td class="td-med">Medium</td><td>4</td><td>After-hours login success, large email attachment, scheduled task creation, VPN login</td></tr>
+    <tr><td class="td-low">Low</td><td>4</td><td>Normal logins, normal file access, USB safely removed</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>22</strong></td><td></td></tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="pb">
+<h3 class="sec">7. Suspicious Login Detection System</h3>
+
+<p>The Suspicious Login Detector is the most technically detailed feature of CyberTrace. It is split into two parts — a <strong>row-level table</strong> and an <strong>Alerts Panel</strong> — each using a different detection approach.</p>
+
+<h4 class="sub">7.1 Part 1 — Row-Level Detection (4 Rules)</h4>
+<p>Applied per login record in the table. Each row is checked against all 4 rules. A matching row turns red with a badge label.</p>
+
+<div class="rule-grid">
+  <div class="rule-card"><strong>Rule 1 — Repeated Failures</strong>Status = "Failed" AND attempt count ≥ 3. Indicates a possible brute-force or password spray attack.</div>
+  <div class="rule-card"><strong>Rule 2 — After Hours</strong>Login hour between 00:00 and 04:59. Logins in this window are statistically unusual for office workers.</div>
+  <div class="rule-card"><strong>Rule 3 — Suspicious Location</strong>Location = "Unknown" or contains "Tor Network". Tor exit nodes are used to anonymise malicious activity.</div>
+  <div class="rule-card"><strong>Rule 4 — Flagged Account</strong>Username = phantom_x or unknown_scan. These accounts are known rogue entries identified during investigation.</div>
+</div>
+
+<h4 class="sub">7.2 Part 2 — Alerts Panel (3 Advanced Pattern Detections)</h4>
+<p>These three detection functions scan the <em>entire</em> dataset as a whole, looking for patterns that span multiple records — not just one row at a time.</p>
+
+<table>
+  <thead><tr><th>Detection</th><th>Function</th><th>Algorithm</th><th>Severity</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>🔁 Repeated Failed Logins</td>
+      <td><code>detectRepeatedFailures()</code></td>
+      <td>Loop through loginAttempts. Flag any record where status = "Failed" AND attempts ≥ 5. Severity is Critical if ≥ 9 attempts.</td>
+      <td><span class="td-critical">Critical / High</span></td>
+    </tr>
+    <tr>
+      <td>🖥️ Multiple Usernames / One IP</td>
+      <td><code>detectMultiUserSameIP()</code></td>
+      <td>Build a Map keyed by IP. For each IP, collect unique usernames in a Set. Flag any IP with Set.size ≥ 2. Critical if ≥ 3 usernames.</td>
+      <td><span class="td-critical">Critical / High</span></td>
+    </tr>
+    <tr>
+      <td>🔓 Success After Failures</td>
+      <td><code>detectSuccessAfterFailure()</code></td>
+      <td>Build a Set of usernames with 3+ prior failures. Find all Success records whose username is in that Set. Every match = Critical alert.</td>
+      <td><span class="td-critical">Critical</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="sub">7.3 Sample Alert Cards Generated</h4>
+
+<div class="alert-demo alert-crit">
+  <div class="alert-demo-head">🔁 Repeated Failed Logins <span class="sev-crit">CRITICAL</span></div>
+  <div class="alert-demo-meta">👤 unknown_scan  |  🌐 198.51.100.77  |  📍 Unknown  |  🕐 2024-03-15 04:10:00</div>
+  <div class="alert-demo-detail"><strong>12 failed login attempts</strong> recorded for account <code>unknown_scan</code> from IP <code>198.51.100.77</code> (Unknown).</div>
+</div>
+
+<div class="alert-demo alert-crit">
+  <div class="alert-demo-head">🖥️ Multiple Usernames from One IP <span class="sev-crit">CRITICAL</span></div>
+  <div class="alert-demo-meta">👤 3 accounts  |  🌐 203.0.113.99  |  📍 Mumbai, India  |  🕐 2024-03-15 05:01:11</div>
+  <div class="alert-demo-detail">IP <code>203.0.113.99</code> (Mumbai, India) attempted login with <strong>3 different usernames</strong>: <code>admin, root, superuser</code>. Classic credential stuffing pattern.</div>
+</div>
+
+<div class="alert-demo alert-crit">
+  <div class="alert-demo-head">🔓 Successful Login After Repeated Failures <span class="sev-crit">CRITICAL</span></div>
+  <div class="alert-demo-meta">👤 meera.iyer  |  🌐 198.51.100.55  |  📍 Kolkata, India  |  🕐 2024-03-15 06:12:45</div>
+  <div class="alert-demo-detail">Account <code>meera.iyer</code> had 7 prior failed logins — then a <strong>successful login</strong> was recorded from <code>198.51.100.55</code> (Kolkata, India). Account likely compromised.</div>
+</div>
+
+<h4 class="sub">7.4 Toggle-Explanation Feature</h4>
+<p>
+  Each alert card contains a <strong>"💡 What does this mean?"</strong> button. Clicking it expands a purple-bordered explanation box written in plain English — suitable for beginners. Clicking again collapses it. This is implemented via the <code>toggleExplanation(idx)</code> function in <code>app.js</code> using <code>element.style.display</code> toggling.
+</p>
+</div>
+
+
+<div class="pb">
+<h3 class="sec">8. Forensic Timeline Cases</h3>
+
+<p>The Forensic Timeline section contains 3 selectable fictional cases displayed as a vertical step-by-step timeline. The timeline line uses a blue-to-purple CSS gradient. Each step shows: timestamp, actor, action taken, evidence artefact filename, and analyst notes.</p>
+
+<h4 class="sub">Case #001 — Insider Threat: Q1 Data Exfiltration (8 Steps, Closed)</h4>
+<div class="tl">
+  <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-time">2024-03-10 08:00</span> — jordan.blake logs in normally — no anomaly at this point</div></div>
+  <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-time">2024-03-10 08:45</span> — Accesses confidential Q1 project files (flagged in retrospect)</div></div>
+  <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-time">2024-03-10 11:30</span> — Emails Q1_Budget.zip to personal Gmail — triggers DLP alert</div></div>
+  <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-time">2024-03-10 14:05</span> — Searches internal wiki for "HR resignation process" (browser artefact)</div></div>
+  <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-time">2024-03-13 23:58</span> — Inserts USB drive TRANSCEND_16GB after hours — no colleagues present</div></div>
+  <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-time">2024-03-14 00:12</span> — Copies 1,204 files (2.1 GB) to USB in under 15 minutes</div></div>
+  <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-time">2024-03-14 00:28</span> — Runs <code>cipher /w:C:\</code> to wipe free space — anti-forensics indicator</div></div>
+  <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><span class="tl-time">2024-03-14 00:35</span> — USB removed, workstation locked — last recorded action</div></div>
+</div>
+
+<h4 class="sub">Case #002 — Phantom USB: Server Room Intrusion (7 Steps, Active)</h4>
+<p style="font-size:.82rem;color:#718096">Unescorted visitor → USB Rubber Ducky inserted into server → PowerShell payload executed in 3 seconds → Remote shell established to C2 server → Lateral movement to DB server using stolen credentials → SQL database dump compressed → USB removed. Total dwell time: ~68 minutes.</p>
+
+<h4 class="sub">Case #003 — Operation Night Owl: HR Data Breach (7 Steps, Active)</h4>
+<p style="font-size:.82rem;color:#718096">riley.cross connects via Tor VPN (Tor exit node) → Authenticates to HR portal → Automated scraper: 327 requests in 40 seconds → Downloads 4,200 employee records → Exfiltrates 2.3 GB to external SFTP → Session terminates → SIEM alert fires 8 hours later (next business day).</p>
+
+
+<h3 class="sec">9. Investigation Cases Summary</h3>
+
+<table>
+  <thead><tr><th>Case ID</th><th>Title</th><th>Suspect (Fictional)</th><th>Status</th><th>Key Concept</th></tr></thead>
+  <tbody>
+    <tr><td>C001</td><td>Insider Threat – Q1 Data Exfiltration</td><td>Jordan Blake</td><td class="td-closed">Closed</td><td>Insider threat, anti-forensics</td></tr>
+    <tr><td>C002</td><td>Phantom USB – Server Room Intrusion</td><td>Unknown Visitor</td><td class="td-active">Active</td><td>Physical access, HID attack, lateral movement</td></tr>
+    <tr><td>C003</td><td>Operation Night Owl – HR Data Breach</td><td>Riley Cross</td><td class="td-active">Active</td><td>VPN/Tor, credential abuse, data exfiltration</td></tr>
+    <tr><td>C004</td><td>Ghost Account – Privilege Escalation</td><td>Unknown (via jordan.blake)</td><td class="td-open">Open</td><td>Privilege escalation, rogue account creation</td></tr>
+    <tr><td>C005</td><td>Macro Attack – Email Payload Delivery</td><td>Dev Winters (victim)</td><td class="td-closed">Closed</td><td>Phishing, macro execution, social engineering</td></tr>
+    <tr><td>C006</td><td>Firewall Compromise – Perimeter Rule Change</td><td>phantom_x (linked C004)</td><td class="td-open">Open</td><td>Firewall tampering, persistence mechanism</td></tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="pb">
+<h3 class="sec">10. SHA-256 Hash Demonstration</h3>
+
+<p>The Hash Demo section uses the <strong>Web Crypto API</strong> — a cryptography engine built into every modern browser — to compute a real SHA-256 hash of any text the user types. No external library is used. The hash updates live as each character is typed.</p>
+
+<h4 class="sub">Code Flow</h4>
+<div class="codebox">
+<span class="cm">// Step 1: Encode text to bytes (UTF-8)</span>
+const data = new TextEncoder().encode(inputText);
+
+<span class="cm">// Step 2: Compute SHA-256 hash asynchronously</span>
+const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
+<span class="cm">// Step 3: Convert raw bytes to readable hex string</span>
+const hashHex = Array.from(new Uint8Array(hashBuffer))
+  .map(b =&gt; b.toString(16).padStart(2, "0")).join("");
+
+<span class="cm">// Step 4: Display in the output box</span>
+document.getElementById("hashOutput").textContent = hashHex;
+</div>
+
+<h4 class="sub">Key Teaching Points Shown in the App</h4>
+<ul>
+  <li>SHA-256 always produces a <strong>64-character hex string</strong> regardless of input length</li>
+  <li>The <strong>avalanche effect</strong>: changing even one character completely changes the hash</li>
+  <li>Forensic analysts <strong>hash evidence files</strong> on collection and verify the hash later to prove no tampering</li>
+  <li>A pre-loaded table shows 5 fictional evidence file names with SHA-256 hashes and forensic notes</li>
+</ul>
+
+<h4 class="sub">Pre-loaded Fictional Evidence Hashes</h4>
+<table>
+  <thead><tr><th>Fictional Evidence File</th><th>SHA-256 Hash (truncated)</th><th>Forensic Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>jordan_blake_backup_photo.jpg</td><td>3fc9b689…813cb</td><td>Verifies image was not edited after collection</td></tr>
+    <tr><td>employee_export_march.csv</td><td>e3b0c442…b855</td><td>Empty file baseline hash for comparison</td></tr>
+    <tr><td>phantom_x_shell_script.ps1</td><td>b94d27b9…6b50</td><td>Malicious script artefact — hash matches C2 payload</td></tr>
+    <tr><td>Q1_Budget_stolen_copy.zip</td><td>2c624232…c6a</td><td>Exfiltrated archive — hash matches copy found on USB</td></tr>
+    <tr><td>audit_log_before_delete.evtx</td><td>a87ff679…d5</td><td>Recovered log backup — proves deletion occurred</td></tr>
+  </tbody>
+</table>
+
+
+<h3 class="sec">11. Design &amp; User Interface</h3>
+
+<table>
+  <thead><tr><th>Design Element</th><th>Implementation</th></tr></thead>
+  <tbody>
+    <tr><td>Colour palette</td><td>Light page background (#f0f4f8), white cards, deep navy (#1a3a5c) for nav/hero/tables, blue (#2563eb) accents</td></tr>
+    <tr><td>Typography</td><td>System font stack ('Segoe UI', system-ui) — no external font download needed</td></tr>
+    <tr><td>Hero section</td><td>Dark navy gradient with CSS dot-grid pattern and radial glow effect — created with pure CSS pseudo-elements</td></tr>
+    <tr><td>Feature strip</td><td>6-column icon row below the hero — auto-fills columns using CSS Grid auto-fit</td></tr>
+    <tr><td>Illustration headers</td><td>Each section has a pictorial icon + "What is this?" description card to explain the forensics concept</td></tr>
+    <tr><td>Table headers</td><td>Navy-to-blue CSS gradient on all table headers for visual consistency</td></tr>
+    <tr><td>Alert card variants</td><td>3 severity tiers: Critical (light red, red border), High (light orange, orange border), Medium (light yellow)</td></tr>
+    <tr><td>Status indicator</td><td>Green pulsing ring animation (CSS @keyframes) for "Simulation Active"</td></tr>
+    <tr><td>Responsive design</td><td>@media max-width:640px breakpoint — collapses grids to 2 columns on phones</td></tr>
+    <tr><td>Disclaimer</td><td>Sticky red banner at top of page + red label under every section title</td></tr>
+  </tbody>
+</table>
+
+
+<h3 class="sec">12. Educational Concepts Covered</h3>
+
+<table>
+  <thead><tr><th>Concept</th><th>Section Where It Appears</th></tr></thead>
+  <tbody>
+    <tr><td>System event logging</td><td>Event Log — all 22 fictional events</td></tr>
+    <tr><td>Severity classification (High/Medium/Low)</td><td>Event Log — colour-coded severity badges</td></tr>
+    <tr><td>Brute-force password attacks</td><td>Login Detector Row Rule 1 + Alert Detection 1</td></tr>
+    <tr><td>After-hours access anomalies</td><td>Login Detector Row Rule 2</td></tr>
+    <tr><td>Tor network / anonymisation techniques</td><td>Login Detector Row Rule 3; Case #003 timeline</td></tr>
+    <tr><td>Rogue / flagged account detection</td><td>Login Detector Row Rule 4</td></tr>
+    <tr><td>Credential stuffing attacks</td><td>Alert Detection 2 — multiple usernames from one IP (Mumbai)</td></tr>
+    <tr><td>Account compromise detection</td><td>Alert Detection 3 — success after failures (Kolkata)</td></tr>
+    <tr><td>Forensic timeline reconstruction</td><td>Forensic Timeline — all 3 cases</td></tr>
+    <tr><td>Evidence artefact identification</td><td>Timeline — artefact field per step</td></tr>
+    <tr><td>Chain of custody</td><td>Timeline — ordered steps with analyst notes</td></tr>
+    <tr><td>Digital case management</td><td>Investigation Cases — 6 case cards</td></tr>
+    <tr><td>Anti-forensics (log wiping)</td><td>Case #001 — cipher /w step</td></tr>
+    <tr><td>Insider threat patterns</td><td>Case #001 — full timeline</td></tr>
+    <tr><td>HID/USB-based physical attack</td><td>Case #002 — Rubber Ducky</td></tr>
+    <tr><td>Lateral movement</td><td>Case #002 timeline — SMB traffic step</td></tr>
+    <tr><td>Data exfiltration indicators</td><td>Cases #001, #003; Event Log rows 20–22</td></tr>
+    <tr><td>Privilege escalation via rogue accounts</td><td>Cases #004 &amp; #006</td></tr>
+    <tr><td>Social engineering / phishing</td><td>Case #005 — macro attack</td></tr>
+    <tr><td>Cryptographic hashing (SHA-256)</td><td>Hash Demo — live computation</td></tr>
+    <tr><td>Avalanche effect</td><td>Hash Demo — explanation text</td></tr>
+    <tr><td>Evidence integrity verification</td><td>Hash Demo — pre-loaded evidence table</td></tr>
+  </tbody>
+</table>
+
+
+<h3 class="sec">13. Limitations &amp; Scope Boundaries</h3>
+
+<table>
+  <thead><tr><th>Limitation</th><th>Reason / Design Choice</th></tr></thead>
+  <tbody>
+    <tr><td>No real file uploads accepted</td><td>Intentional — keeps the app safe and fictional at all times</td></tr>
+    <tr><td>No connection to real systems or external APIs</td><td>Intentional — runs fully offline, no data leaves the user's browser</td></tr>
+    <tr><td>Data is hardcoded, not dynamically stored</td><td>No server or database — all data lives in app.js; refreshing the page resets everything</td></tr>
+    <tr><td>No user authentication or session management</td><td>Out of scope for an educational simulation</td></tr>
+    <tr><td>SHA-256 only (no MD5 or SHA-1 for comparison)</td><td>Kept simple; SHA-256 is the current industry standard and most relevant for beginners</td></tr>
+    <tr><td>Location data is India-only (no real geolocation)</td><td>Fictional city names used for educational context; no real IP-to-location lookup performed</td></tr>
+    <tr><td>Alert panel does not auto-refresh</td><td>Static dataset — alerts are computed once on page load, consistent with educational intent</td></tr>
+  </tbody>
+</table>
+
+
+<h3 class="sec">14. How to Run the Application</h3>
+
+<div class="greenbox">
+  <strong>Step 1</strong> — Ensure all 3 application files are in the same folder:<br />
+     <code>CyberTrace/index.html</code>   <code>CyberTrace/style.css</code>   <code>CyberTrace/app.js</code><br /><br />
+  <strong>Step 2</strong> — Double-click <code>index.html</code><br /><br />
+  <strong>Step 3</strong> — It opens in your web browser. Explore all sections. Done! ✅<br /><br />
+  <strong>Compatible with:</strong> Google Chrome · Microsoft Edge · Mozilla Firefox · Apple Safari (any modern version)
+</div>
+
+
+<h3 class="sec">15. Conclusion</h3>
+
+<p>
+  CyberTrace successfully delivers a beginner-friendly, richly interactive environment for learning digital forensics and cybersecurity concepts — requiring zero installation, zero technical background, and zero cost. By presenting a fictional corporate network incident simulation, the application makes abstract security concepts tangible, visual, and explorable.
+</p>
+<p>
+  The most significant enhancement in the final version is the <strong>enhanced Suspicious Login Detector</strong>, which goes beyond simple row-level flagging to implement three advanced pattern-detection algorithms — detecting brute-force attacks, credential stuffing (multiple usernames from one IP), and confirmed account compromises (success after failures). All detection data uses fictional Indian city locations, contextualising the simulation for an Indian audience while maintaining complete fictional integrity.
+</p>
+<p>
+  The <strong>SHA-256 Hash Demo</strong> stands out as a technically genuine feature: it performs a real cryptographic operation using the browser's built-in Web Crypto API, bridging the gap between theory and practice in a completely safe environment. The <strong>Forensic Timeline</strong> reconstructs three different fictional attack scenarios step-by-step, teaching the investigative narrative approach that real analysts use.
+</p>
+<p>
+  Across 22 educational concepts, 6 fictional case files, 20 login records, 22 system events, 3 timeline cases, and 7 total files — CyberTrace demonstrates how HTML, CSS, and JavaScript alone can be used to build a meaningful, educational, and visually polished application without any external dependencies.
+</p>
+<p>
+  Every element of the application — from the sticky red disclaimer banner to the colour-coded alert severity cards and togglable explanations — is designed with one principle: <em>make cybersecurity accessible, clear, and safe for a complete beginner.</em>
+</p>
+
+</div>
+
+
+<div class="report-footer">
+  <p><strong>CyberTrace – Simulated Digital Forensics Lab</strong>  |  Complete Project Report</p>
+  <p>⚠️ Educational Simulation — Fictional Data Only  |  HTML · CSS · JavaScript  |  Runs 100% in your browser</p>
+  <p style="margin-top:.35rem;color:#d1d5db">Made with IBM Bob</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  CyberTrace – Simulated Digital Forensics Lab
+  FILE: index.html
+  PURPOSE: The main (and only) HTML page. It holds every section
+           of the app. CSS styles it. JavaScript fills it with
+           fictional data and handles all the logic.
+  HOW TO RUN: Just double-click this file in your file explorer.
+              It will open in your web browser — no install needed.
+  ============================================================
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Makes the page look correct on phones and tablets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberTrace – Simulated Digital Forensics Lab</title>
+
+  <!-- Link to our CSS file for all the styling -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       DISCLAIMER BANNER
+       Always visible at the top. Reminds users this is fictional.
+       ============================================================ -->
+  <div class="disclaimer-banner">
+    ⚠️ EDUCATIONAL SIMULATION — FICTIONAL DATA ONLY &nbsp;|&nbsp;
+    No real systems. No real data. No real people.
+  </div>
+
+  <!-- ============================================================
+       TOP NAVIGATION BAR
+       Clicking a nav link scrolls to that section on the page.
+       ============================================================ -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <!-- The lock icon is just a text character (Unicode) -->
+      🔒 CyberTrace
+      <span class="nav-subtitle">Digital Forensics Lab</span>
+    </div>
+    <ul class="nav-links">
+      <!-- Each href="#sectionId" jumps to that section -->
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#events">Event Log</a></li>
+      <li><a href="#logins">Login Alerts</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#cases">Cases</a></li>
+      <li><a href="#hash">Hash Demo</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+       HERO / INTRO SECTION
+       First thing the user sees after the navbar.
+       ============================================================ -->
+  <header class="hero">
+    <h1>🔍 CyberTrace</h1>
+    <p class="hero-subtitle">Simulated Digital Forensics Lab</p>
+    <p class="hero-desc">
+      Learn the fundamentals of digital forensics through interactive,
+      fictional simulations. Explore event logs, investigate suspicious
+      login patterns, trace a forensic timeline, and more.
+    </p>
+    <div class="badge-row">
+      <span class="badge badge-green">✔ Educational</span>
+      <span class="badge badge-blue">✔ Fictional Data</span>
+      <span class="badge badge-orange">✔ No Real Systems</span>
+      <span class="badge badge-teal">✔ Runs Offline</span>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       FEATURE ICON STRIP
+       A pictorial row of icons below the hero explaining
+       what the app does at a glance — purely visual.
+       ============================================================ -->
+  <div class="feature-strip">
+    <div class="feature-item">
+      <div class="feature-icon">📊</div>
+      <div class="feature-label">Live Dashboard</div>
+      <div class="feature-desc">Fictional stats &amp; alerts at a glance</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🚨</div>
+      <div class="feature-label">Login Detector</div>
+      <div class="feature-desc">Auto-flags suspicious patterns</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🕒</div>
+      <div class="feature-label">Forensic Timeline</div>
+      <div class="feature-desc">Step-by-step incident reconstruction</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🗂️</div>
+      <div class="feature-label">Case Files</div>
+      <div class="feature-desc">6 fictional investigation cases</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔐</div>
+      <div class="feature-label">Hash Demo</div>
+      <div class="feature-desc">Live SHA-256 in your browser</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">⬇️</div>
+      <div class="feature-label">Export Report</div>
+      <div class="feature-desc">Download events as CSV</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN CONTENT WRAPPER
+       All sections live inside this container.
+       ============================================================ -->
+  <main class="container">
+
+    <!-- ===========================================================
+         SECTION 1 — DASHBOARD
+         Shows summary "stat cards" — totals pulled from JS data.
+         =========================================================== -->
+    <section id="dashboard" class="section">
+      <h2 class="section-title">📊 Dashboard</h2>
+      <p class="section-label">EDUCATIONAL SIMULATION – FICTIONAL DATA ONLY</p>
+      <!-- Pictorial intro card -->
+      <div class="illus-header">
+        <div class="illus-icon">📊</div>
+        <div class="illus-text">
+          <h3>What is a Security Dashboard?</h3>
+          <p>In a real Security Operations Centre (SOC), analysts watch live dashboards that count events, alerts, and cases. This simulated dashboard reads fictional data and displays key numbers instantly.</p>
+        </div>
+      </div>
+
+      <!-- These cards are filled in by JavaScript (see app.js → renderDashboard) -->
+      <div class="card-grid" id="dashboardCards">
+        <!-- JS will inject cards here -->
+      </div>
+
+      <!-- A simple system status indicator -->
+      <div class="status-bar">
+        <span class="status-dot active"></span>
+        Simulation Active &nbsp;|&nbsp; Fictional Environment &nbsp;|&nbsp;
+        Last Refreshed: <span id="lastRefreshed">—</span>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 2 — EVENT LOG
+         A table of fictional system events (logins, USB, etc.)
+         =========================================================== -->
+    <section id="events" class="section">
+      <h2 class="section-title">📋 Event Log</h2>
+      <p class="section-label">EDUCATIONAL SIMULATION – FICTIONAL DATA ONLY</p>
+      <!-- Pictorial intro card -->
+      <div class="illus-header">
+        <div class="illus-icon">🖥️</div>
+        <div class="illus-text">
+          <h3>What is a System Event Log?</h3>
+          <p>Every computer silently records activity — logins, file opens, USB connections, program launches. Forensic analysts read these logs like a diary to reconstruct what happened during an incident.</p>
+        </div>
+      </div>
+      <p class="section-desc">
+        Below is a simulated event log from a fictional corporate network.
+        Each row represents one recorded system event. Use the filter buttons
+        to sort by severity level.
+      </p>
+
+      <!-- Filter buttons — clicking filters the table by severity -->
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterEvents('all')">All</button>
+        <button class="filter-btn" onclick="filterEvents('High')">🔴 High</button>
+        <button class="filter-btn" onclick="filterEvents('Medium')">🟠 Medium</button>
+        <button class="filter-btn" onclick="filterEvents('Low')">🟢 Low</button>
+      </div>
+
+      <!-- Table filled in by JavaScript → renderEvents() -->
+      <div class="table-wrapper">
+        <table id="eventsTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Timestamp</th>
+              <th>Event Type</th>
+              <th>User</th>
+              <th>Machine</th>
+              <th>Description</th>
+              <th>Severity</th>
+            </tr>
+          </thead>
+          <!-- JS fills this tbody -->
+          <tbody id="eventsBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Download button — triggers CSV export in app.js -->
+      <button class="btn-primary" onclick="downloadReport()">
+        ⬇ Download Event Report (.csv)
+      </button>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 3 — SUSPICIOUS LOGIN DETECTOR
+         Highlights logins that look suspicious using JS rules.
+         =========================================================== -->
+    <section id="logins" class="section">
+      <h2 class="section-title">🚨 Suspicious Login Detector</h2>
+      <p class="section-label">EDUCATIONAL SIMULATION – FICTIONAL DATA ONLY</p>
+
+      <!-- Pictorial intro card -->
+      <div class="illus-header">
+        <div class="illus-icon">🔎</div>
+        <div class="illus-text">
+          <h3>How Do Analysts Detect Suspicious Logins?</h3>
+          <p>Analysts scan authentication logs for unusual patterns — repeated failures, logins at odd hours, access from flagged locations, and automated attacks like credential stuffing. All data below is fictional and set in India.</p>
+        </div>
+      </div>
+
+      <p class="section-desc">
+        This section has <strong>two parts</strong>:
+        (1) a row-by-row login table with 4 detection rules applied per row,
+        and (2) an <strong>Alerts Panel</strong> below it with 3 deeper
+        pattern-detection analyses — all using fictional Indian location data.
+      </p>
+
+      <!-- ── PART 1: Login Table ─────────────────────────────────────── -->
+      <h3 style="font-size:1rem; color:var(--accent-blue); margin-bottom:0.6rem; margin-top:1rem;">
+        Part 1 — Login Records Table
+      </h3>
+
+      <!-- Legend -->
+      <div class="legend">
+        <span class="badge badge-red">🔴 Suspicious Row</span>
+        <span class="badge badge-green">🟢 Normal Row</span>
+        <span style="font-size:0.8rem; color:var(--text-mid);">
+          Row rules: (1) 3+ failures &nbsp;(2) After hours &nbsp;(3) Unknown/Tor location &nbsp;(4) Flagged account
+        </span>
+      </div>
+
+      <!-- Table filled by JavaScript → renderLogins() -->
+      <div class="table-wrapper">
+        <table id="loginsTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Timestamp</th>
+              <th>Username</th>
+              <th>IP Address</th>
+              <th>Location (India)</th>
+              <th>Status</th>
+              <th>Attempts</th>
+              <th>Flag</th>
+            </tr>
+          </thead>
+          <tbody id="loginsBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Summary injected by JS after the table renders -->
+      <div id="loginSummary" class="info-box"></div>
+
+      <!-- ── PART 2: Alerts Panel ────────────────────────────────────── -->
+      <h3 style="font-size:1rem; color:var(--accent-blue); margin-bottom:0.6rem; margin-top:2rem;">
+        Part 2 — 🚨 Alerts Panel
+        <span id="alertCount" style="font-size:0.78rem; background:var(--accent-red); color:#fff; padding:0.2rem 0.7rem; border-radius:20px; font-weight:700; margin-left:0.75rem; vertical-align:middle;"></span>
+      </h3>
+
+      <!-- Three alert explanation boxes — what each detection looks for -->
+      <div class="alerts-explainer">
+        <div class="ae-card">
+          <span class="ae-icon">🔁</span>
+          <div>
+            <strong>Detection 1 — Repeated Failed Logins</strong><br>
+            <span>Flags any account with 5+ failed attempts. Indicates a brute-force password attack.</span>
+          </div>
+        </div>
+        <div class="ae-card">
+          <span class="ae-icon">🖥️</span>
+          <div>
+            <strong>Detection 2 — Multiple Usernames from One IP</strong><br>
+            <span>Flags any IP that tried 2+ different usernames. Indicates credential stuffing (automated attack).</span>
+          </div>
+        </div>
+        <div class="ae-card">
+          <span class="ae-icon">🔓</span>
+          <div>
+            <strong>Detection 3 — Successful Login After Repeated Failures</strong><br>
+            <span>Flags a success that follows prior failures from the same account. Indicates the attacker succeeded.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alert cards injected by JavaScript → renderAlerts() -->
+      <div id="alertsPanel"></div>
+
+    </section>
+
+    <!-- ===========================================================
+         SECTION 4 — FORENSIC TIMELINE
+         A vertical visual timeline of a fictional investigation.
+         =========================================================== -->
+    <section id="timeline" class="section">
+      <h2 class="section-title">🕒 Forensic Timeline</h2>
+      <p class="section-label">EDUCATIONAL SIMULATION – FICTIONAL DATA ONLY</p>
+      <!-- Pictorial intro card -->
+      <div class="illus-header">
+        <div class="illus-icon">⏱️</div>
+        <div class="illus-text">
+          <h3>What is a Forensic Timeline?</h3>
+          <p>A forensic timeline puts all discovered evidence events in chronological order. It helps investigators answer: "What happened first? What did the attacker do next? How did it end?" — like piecing together a crime scene story.</p>
+        </div>
+      </div>
+      <p class="section-desc">
+        Use the dropdown to switch between 3 fictional investigation timelines.
+        Each step shows the actor, action, evidence artefact, and analyst notes.
+      </p>
+
+      <!-- Case selector — allows switching between fictional cases -->
+      <div class="filter-row">
+        <label for="caseSelect" style="color:var(--text-muted);">View Timeline for Case:</label>
+        <select id="caseSelect" onchange="renderTimeline(this.value)">
+          <option value="C003">Case #003 – Operation Night Owl</option>
+          <option value="C001">Case #001 – Insider Threat</option>
+          <option value="C002">Case #002 – Phantom USB</option>
+        </select>
+      </div>
+
+      <!-- Timeline items injected by JS → renderTimeline() -->
+      <div class="timeline" id="timelineContainer"></div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 5 — INVESTIGATION CASES
+         Fictional case files with suspect, status, and summary.
+         =========================================================== -->
+    <section id="cases" class="section">
+      <h2 class="section-title">🗂️ Investigation Cases</h2>
+      <p class="section-label">EDUCATIONAL SIMULATION – FICTIONAL DATA ONLY</p>
+      <!-- Pictorial intro card -->
+      <div class="illus-header">
+        <div class="illus-icon">🗄️</div>
+        <div class="illus-text">
+          <h3>What is a Forensic Case File?</h3>
+          <p>Every digital investigation is tracked as a case — with a unique number, a named suspect, a current status (Open / Active / Closed), and a written narrative summary. This mirrors how real SOC teams and law enforcement document incidents.</p>
+        </div>
+      </div>
+      <p class="section-desc">
+        Browse 6 fictional case cards below. Each represents a different type
+        of cybersecurity incident — from insider threats to phishing attacks.
+      </p>
+
+      <!-- Case cards injected by JS → renderCases() -->
+      <div class="card-grid" id="casesContainer"></div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 6 — SHA-256 HASH DEMO
+         User types text → browser computes a real SHA-256 hash.
+         =========================================================== -->
+    <section id="hash" class="section">
+      <h2 class="section-title">🔐 SHA-256 Hash Demo</h2>
+      <p class="section-label">EDUCATIONAL SIMULATION – FICTIONAL DATA ONLY</p>
+
+      <!-- Pictorial intro card -->
+      <div class="illus-header">
+        <div class="illus-icon">🧬</div>
+        <div class="illus-text">
+          <h3>What is Cryptographic Hashing?</h3>
+          <p>Hashing turns any piece of data into a unique fixed-length "fingerprint". Forensic analysts hash every evidence file when they collect it — then hash it again later. If the two hashes match, the file was never changed. If they differ, someone tampered with the evidence.</p>
+        </div>
+      </div>
+
+      <!-- What is hashing? -->
+      <div class="info-box">
+        <strong>What is a Hash?</strong><br />
+        A <em>cryptographic hash</em> is like a digital fingerprint for data.
+        You feed in any text (or file), and the algorithm produces a fixed-length
+        string of characters. The same input <em>always</em> produces the same hash.
+        Change even one character, and the hash changes completely.
+        Forensic analysts use hashes to verify that evidence files haven't been
+        tampered with.
+      </div>
+
+      <!-- Input area -->
+      <div class="hash-demo-box">
+        <label for="hashInput">Type anything below to see its SHA-256 hash:</label>
+        <textarea
+          id="hashInput"
+          rows="3"
+          placeholder="e.g. Hello World  — or try a fictional file name like: suspect_photo.jpg"
+          oninput="computeHash()"
+        ></textarea>
+
+        <!-- The hash output appears here -->
+        <div class="hash-output-label">SHA-256 Hash Output:</div>
+        <div class="hash-output" id="hashOutput">
+          [ type something above to generate a hash ]
+        </div>
+
+        <!-- Visual explanation of what changed -->
+        <div id="hashExplanation" class="hash-explanation"></div>
+      </div>
+
+      <!-- Pre-loaded examples using fictional file names -->
+      <h3 style="color:var(--accent-cyan); margin-top:2rem;">
+        📂 Pre-loaded Fictional File Hash Examples
+      </h3>
+      <p class="section-desc">
+        Below are fictional file names with pre-computed SHA-256 hashes.
+        These demonstrate how forensic analysts catalogue evidence by hash value.
+      </p>
+      <!-- Table filled by JS → renderHashExamples() -->
+      <div class="table-wrapper">
+        <table id="hashTable">
+          <thead>
+            <tr>
+              <th>Fictional File Name</th>
+              <th>SHA-256 Hash</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="hashExamplesBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main><!-- end .container -->
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <p>
+      🔒 <strong>CyberTrace</strong> – Simulated Digital Forensics Lab
+    </p>
+    <p class="footer-disclaimer">
+      ⚠️ This application is for educational purposes only.
+      All data, names, IP addresses, and cases are entirely fictional.
+      No real systems are connected. No real data is processed.
+    </p>
+    <p style="color:var(--text-muted); font-size:0.75rem; margin-top:0.5rem;">
+      Built with HTML · CSS · JavaScript &nbsp;|&nbsp; Runs 100% in your browser
+    </p>
+  </footer>
+
+  <!-- ============================================================
+       LOAD JAVASCRIPT
+       This must come AFTER the HTML so the elements exist
+       before JS tries to find them (getElementById, etc.)
+       ============================================================ -->
+  <script src="app.js"></script>
+
+</body>
+</html>

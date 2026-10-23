@@ -1,0 +1,76 @@
+# ==============================================================
+# CyberTrace – Simulated Digital Forensics Lab
+# FILE: requirements.txt
+# PURPOSE: Lists everything needed to run this project.
+#
+# GOOD NEWS: This project uses ONLY HTML, CSS, and JavaScript.
+# It runs entirely in your web browser.
+# You do NOT need to install anything at all.
+# ==============================================================
+
+# ---------------------------------------------------------------
+# BROWSER REQUIREMENTS (no install needed — you already have one)
+# ---------------------------------------------------------------
+# Any modern web browser works:
+#   - Google Chrome        v90+   https://www.google.com/chrome
+#   - Microsoft Edge       v90+   (already on Windows 10/11)
+#   - Mozilla Firefox      v88+   https://www.mozilla.org/firefox
+#   - Apple Safari         v14+   (Mac/iPhone)
+#
+# The SHA-256 Hash Demo uses the Web Crypto API,
+# which is built into every modern browser listed above.
+# ---------------------------------------------------------------
+
+# ---------------------------------------------------------------
+# OPERATING SYSTEM
+# ---------------------------------------------------------------
+# Windows 10 / 11     ✔ Supported
+# macOS 11+           ✔ Supported
+# Linux (any distro)  ✔ Supported
+# ---------------------------------------------------------------
+
+# ---------------------------------------------------------------
+# NO PYTHON REQUIRED
+# ---------------------------------------------------------------
+# This project was originally planned with Python/Flask
+# but was rebuilt as a pure frontend application.
+# Python is NOT needed.
+# ---------------------------------------------------------------
+
+# ---------------------------------------------------------------
+# NO NPM / NODE.JS REQUIRED
+# ---------------------------------------------------------------
+# There are no JavaScript build tools, no package.json,
+# no node_modules folder. Nothing to install.
+# ---------------------------------------------------------------
+
+# ---------------------------------------------------------------
+# NO INTERNET CONNECTION REQUIRED
+# ---------------------------------------------------------------
+# All code runs locally. No external APIs. No CDN links.
+# Works completely offline once the files are on your computer.
+# ---------------------------------------------------------------
+
+# ---------------------------------------------------------------
+# OPTIONAL — CODE EDITOR (for exploring / editing the code)
+# ---------------------------------------------------------------
+# If you want to edit the code, any of these free editors work:
+#   - Visual Studio Code   https://code.visualstudio.com  (recommended)
+#   - Notepad++            https://notepad-plus-plus.org
+#   - Sublime Text         https://www.sublimetext.com
+#   - Notepad              (already on Windows — works in a pinch)
+# ---------------------------------------------------------------
+
+# ---------------------------------------------------------------
+# HOW TO RUN (reminder)
+# ---------------------------------------------------------------
+# Step 1: Make sure all 3 files are in the same folder:
+#           CyberTrace/
+#               index.html
+#               style.css
+#               app.js
+#
+# Step 2: Double-click index.html
+#
+# Step 3: It opens in your browser. Done!
+# ---------------------------------------------------------------
